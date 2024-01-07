@@ -1,0 +1,55 @@
+<!-- 3 -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <label for="" num1>Num 1:</label>
+        <input type="text" id="num1" />
+    </div>
+
+    <div>
+        <label for="" num=2>Num 2:</label>
+        <input type="text" id="num2" />
+    </div>
+
+    <div>
+        <label for="op">Op:</label>
+        <select id="op">
+            <option value="add">+</option>
+            <option value="minus">-</option>
+            <option value="times">X</option>
+            <option value="divide">/</option>
+        </select>
+    </div>
+
+    <div>
+        <button onclick="doOp()">Calculate</button>
+    </div>
+    <div>
+        = <span id="result"></span>
+    </div>
+
+    <script>
+        function doOp() {
+            let num1 = document.getElementById("num1").value;
+            let num2 = document.getElementById("num2").value;
+            let op = document.getElementById("op").value;
+
+            fetch(`/calculator/${op}?num1=${num1}&num2=${num2}`)
+                .then(response => reponse.json())
+                .then(data => {
+                    document.getElementById("result").innerHTML = data.result;
+                });
+        }
+    </script>
+</body>
+
+</html>
